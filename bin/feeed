@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const path = require('path');
+const { CronJob } = require('cron');
+const render = require('../lib/render');
+const crawl = require('../lib/crawl');
+const { getExist, write } = require('../lib/save');
+
+async function run(target, dir) {
+  const exist = getExist(target.link, dir);
+  const data = await crawl(target);
+  const newItems = data.items.filter(item => !exist.map[item.id]);
+  if (newItems.length === 0) return;
+  const xml = render({
+    title: data.title,
+    ...target,
+    items: newItems.concat(exist.items).slice(0, target.limit || 20),
+  });
+  write(target.link, xml, dir);
+}
+
+program
+  .version('0.1.0')
+  .option('-c, --config [file]', 'set config file', './sites.js')
+  .option('-d, --dir [dir]', 'set target dir', './rss')
+  .parse(process.argv);
+
+const config = path.resolve(process.cwd(), program.config);
+const targets = require(config); // eslint-disable-line
+
+targets.forEach((target) => {
+  run(target, program.dir);
+  return new CronJob(target.cron, () => run(target, program.dir), null, true);
+});
