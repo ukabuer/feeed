@@ -1,6 +1,6 @@
 {
   "name": "feeed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a simple tool to generate RSS feeds for any webpage",
   "bin": {
     "feeed": "bin/feeed"
