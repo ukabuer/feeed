@@ -30,6 +30,9 @@ const config = path.resolve(process.cwd(), program.config);
 const targets = require(config); // eslint-disable-line
 
 targets.forEach((target) => {
+  const { cron } = target;
+  const cronTime = typeof cron === 'string' ? cron : cron.time;
+  const cronTimezone = typeof cron === 'string' ? undefined : cron.timezone;
   run(target, program.dir);
-  return new CronJob(target.cron, () => run(target, program.dir), null, true);
+  return new CronJob(cronTime, () => run(target, program.dir), null, true, cronTimezone);
 });
