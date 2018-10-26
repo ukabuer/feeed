@@ -8,7 +8,7 @@ const crawl = require('../lib/crawl');
 const { getExist, write } = require('../lib/save');
 
 async function run(target, dir) {
-  const exist = getExist(target.link, dir);
+  const exist = getExist(target.id, dir);
   const data = await crawl(target);
   const newItems = data.items.filter(item => !exist.map[item.id]);
   if (newItems.length === 0) return;
@@ -17,7 +17,7 @@ async function run(target, dir) {
     ...target,
     items: newItems.concat(exist.items).slice(0, target.limit || 20),
   });
-  write(target.link, xml, dir);
+  write(target.id, xml, dir);
 }
 
 program
