@@ -9,16 +9,16 @@ const validate = require('../lib/validate');
 const { getExist, write } = require('../lib/save');
 
 async function run(target, dir) {
-  const exist = getExist(target.link, dir);
-  const data = await crawl(target);
-  const newItems = data.items.filter(item => !exist.map[item.id]);
+  const exist = getExist(target.id, dir);
+  const items = await crawl(target);
+  const newItems = items.filter(item => !exist.map[item.id]);
   if (newItems.length === 0) return;
+
   const xml = render({
-    title: data.title,
     ...target,
     items: newItems.concat(exist.items).slice(0, target.limit || 20),
   });
-  write(target.link, xml, dir);
+  write(target.id, xml, dir);
 }
 
 program
