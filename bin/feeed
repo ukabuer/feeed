@@ -5,6 +5,7 @@ const path = require('path');
 const { CronJob } = require('cron');
 const render = require('../lib/render');
 const crawl = require('../lib/crawl');
+const validate = require('../lib/validate');
 const { getExist, write } = require('../lib/save');
 
 async function run(target, dir) {
@@ -28,6 +29,14 @@ program
 
 const config = path.resolve(process.cwd(), program.config);
 const targets = require(config); // eslint-disable-line
+
+const valid = validate(targets);
+if (!valid) {
+  const messages = validate.errors.map(error => `  ${error.message}`).join('\n');
+  console.error('Config syntax error:');
+  console.error(messages);
+  process.exit();
+}
 
 targets.forEach((target) => {
   const { cron } = target;
