@@ -32,7 +32,7 @@ const targets = require(config); // eslint-disable-line
 
 const valid = validate(targets);
 if (!valid) {
-  const messages = validate.errors.map(error => `  ${error.message}`).join('\n');
+  const messages = validate.errors.map(error => `  ${error.dataPath}: ${error.message}`).join('\n');
   console.error('Config syntax error:');
   console.error(messages);
   process.exit();
