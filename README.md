@@ -5,8 +5,7 @@ A simple tool to generate RSS feeds for any webpage, support [puppeteer](https:/
 __WARNING: still under development.__
 
 ## Installation
-```
-Make sure you have `nodejs` >= 7.6.0 and `npm` installed beforehand
+Make sure you have `nodejs` >= 7.6.0 and `npm` installed beforehand, then run
 ``` shell
 npm i -g feeed
 ```
