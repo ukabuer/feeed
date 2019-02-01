@@ -2,6 +2,7 @@ module.exports = [
   {
     id: 'douban',
     title: 'Douban Recommended Movie',
+    usePuppeteer: true,
     cron: '*/2 * * * *',
     link: 'https://movie.douban.com/cinema/nowplaying/hangzhou/',
     limit: 30,

@@ -1,6 +1,6 @@
 # feeed
 
-A simple tool to generate RSS feeds for any webpage.
+A simple tool to generate RSS feeds for any webpage, support [puppeteer](https://github.com/GoogleChrome/puppeteer).
 
 __WARNING: still under development.__
 
@@ -22,6 +22,8 @@ module.exports = [
     link: 'https://movie.douban.com/cinema/nowplaying/hangzhou/',
     // limit of item number for RSS feeds
     limit: 30,
+    // if you want to use puppeteer, please install it in your project
+    usePuppeteer: false,
     // customize the way to get items
     process: ($) => {
       // use $ just like using jQuery
