@@ -19,11 +19,12 @@
   "dependencies": {
     "ajv": "^6.6.2",
     "axios": "^0.18.0",
-    "cheerio": "^1.0.0-rc.2",
+    "cheerio": "^1.0.0-rc.3",
     "commander": "^2.19.0",
     "cron": "^1.4.1",
     "debug": "^4.1.0",
     "fs-extra": "^7.0.0",
+    "node-fetch": "^2.6.0",
     "resolve": "^1.10.0"
   }
 }
